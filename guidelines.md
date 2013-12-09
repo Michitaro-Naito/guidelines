@@ -300,8 +300,11 @@ If there are known bugs, fix them before implementing new one.
 ### Report and Discuss
 Most troubles can be solved unless left.
 First of all, tell us if you have any troubles.
+(e.g. Server down, Data loss, Delay of Development, Design mistake, Legal issues, Lack of Skills.)
+
 
 
 ## See Also
 [Mono Coding Guidelines](http://www.mono-project.com/Coding_Guidelines)
+
 [CakePHP Coding Standards](http://book.cakephp.org/2.0/en/contributing/cakephp-coding-conventions.html)
