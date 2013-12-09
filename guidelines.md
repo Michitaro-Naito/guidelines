@@ -3,6 +3,12 @@
 
 ## Common
 
+### Priority of Guidelines
+1. Project Requirements
+2. This Document
+3. Framework
+4. Programming Language
+
 ### Unless required
 
 ### Languages
@@ -27,14 +33,97 @@ Never violate any kind of Intellectual Property Rights (copyrights, patents, tra
 
 ### Use pseudo codes than flow-charts
 
-### Stable and Maintainable
+### Be Stable and Maintainable
 It is more important to be stable than to be fast.
 It is more important to be maintainable than to be fast.
 
-### C# like naming and casing
+### Name and Case like C-Sharp
+good:
+```csharp
+// C#
+public class Bakery{
+  string _shopName = "bar";
+  public List<Customer> customers = new List<Customer>(){
+    new Customer("Alice"),
+    new Customer("Bob")
+  };
+  
+  public void Bake(int amount){
+    // ...
+  }
+}
+```
+
+```php
+// PHP
+class Bakery{
+  private $_shopName = 'Foo Bakery';
+  public $customers = array(
+    new Customer('Alice'),
+    new Customer('Bob')
+  );
+  
+  public function Bake($amount){
+    // ...
+  }
+}
+```
+
+```javascript
+// JavaScript
+function Bakery(){
+  var s = this;
+  s._shopName = 'Foo Bakery';
+  s.customers = [
+    new Customer('Alice'),
+    new Customer('Bob')
+  ];
+  
+  s.Bake = function(amount){
+    // ...
+  }
+}
+```
+
+```css
+/* CSS */
+.foo{
+  text-align: center;
+}
+```
+
+```html
+<!-- HTML -->
+<p>foo</p>
+```
+
+bad:
+```php
+public function getItems(){
+}
+```
+```php
+public function get_items(){
+}
+```
 
 ### Comment anything
 codes and tables
+
+### Avoid Omission
+good:
+```csharp
+public Customer[] GetCustomers(){
+  return _customers;
+}
+```
+
+bad:
+```csharp
+public Customer[] GC(){
+  return _customers;
+}
+```
 
 
 ## Database
