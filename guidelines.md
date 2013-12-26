@@ -183,6 +183,7 @@ public Customer[] GetCustomers(){
 bad:
 ```csharp
 public Customer[] GC(){
+  // Garbage Collection? Google Chrome?
   return _customers;
 }
 ```
@@ -373,13 +374,19 @@ class FooController extends AppController{
 ```
 
 ### Format, HTML Escape at View
+In the most cases, specifications about formatting are provided for View programmer.
+In addition, formatting and escaping at Controller will cause massive troubles for MVVM.
+So, it's a good idea to format and escape at View.
+
 good:
 ```php
 class FooController extends AppController{
   ...
   public function AveragePrice(){
     $price = $this->Data->GetAveragePrice();
+    $text = "Some user text";
     $this->set('price', round($price));
+    $this->set('text', $text);
   }
 }
 
