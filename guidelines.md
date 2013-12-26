@@ -341,7 +341,7 @@ class FoosController extends AppController{
 ```
 
 ### Keep Controller simple
-Don't make a query at Controller.
+Don't make a query at Controller because they are hardly to be reused.
 
 good:
 ```php
