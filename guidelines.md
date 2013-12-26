@@ -5,8 +5,7 @@
 ## Common
 
 ### Purposes
-These guidelines are written to encourage you to keep your codes, databases and projects clean.
-**Short, Simple, Stable and Maintainable** codes will help us in the future.
+These guidelines are written to encourage you to keep your codes, databases and projects **clean, short, simple, stable and maintainable**. These nice things will help us in the future.
 Please follow these instructions if you are willing to cooperate with us. ;)
 
 ### Priority of Guidelines
