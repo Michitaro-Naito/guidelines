@@ -223,6 +223,86 @@ public void UpgradeDataFormat(bool deleteIfFailed){
 }
 ```
 
+### Throw NotImplementedException if not implemented
+If you have partially-implemented codes, throw NotImplementedException to let your cooperators know that it's not ready to be called. If neglected, your cooperators may misunderstand that your function is done, try to call it, face misterious errors and waste their time.:(
+
+good:
+```csharp
+public double CalculateSomething(int a, int b){
+  double result = 0;
+  // ... Complex, partially implemented calculations here ...
+  throw new NotImplementedException();
+}
+```
+bad:
+```csharp
+public double CalculateSomething(int a, int b){
+  double result = 0;
+  // ... Complex, partially implemented calculations here ...
+  return result;
+}
+```
+
+### Short Names for Iteration
+Use short names for iteration to type less.
+
+good:
+```csharp
+foreach(var c in customers){
+  c.UpdateFoo();
+  c.UpdateBar();
+  c.DoSomething();
+}
+```
+bad:
+```csharp
+foreach(var customer in customers){
+  customer.UpdateFoo();
+  customer.UpdateBar();
+  customer.DoSomething();
+}
+```
+
+### Eliminate Typo Bugs
+Humans can typo. Even the greatest programmer types wrong sometimes.
+So, we must prevent bugs being produced when we typo.
+To do this, pick clearly different names for symbols.
+
+good:
+```csharp
+var foo = new Foo();
+var bar = new Bar();
+foo.DoSomething();
+bar.DoSomething();  // If you typo here, the program can't be compiled and you can corret it easily.
+```
+bad:
+```csharp
+var a = new Foo();
+var o = new Bar();
+a.DoSomething();
+o.DoSomething();  // If you typo "o" to "a", the program can be compiled and run but never work correctly. In addition, you will lose a lot of time to find and fix it...
+```
+
+Also, use programming languages which check symbols strictly to avoid this. (If available.)
+
+good:
+```csharp
+// C#
+class Foo{
+  public int bar;
+}
+var foo = new Foo();
+foo.bae = 123;  // Typo. Compile error occurs and you can correct it immediately.
+```
+not good:
+```php
+// PHP
+class Foo{
+  public $bar;
+}
+$foo = new Foo();
+$foo->bae = 123;  // Typo. Declears new member variable "bae" happenedly and compile error never occur. This will be a hidden bug...
+```
 
 
 ## Database
@@ -243,8 +323,88 @@ create table customers(...);
 
 ## Web Programming - Server
 
-None
+### Singular
+Use singular names for Controllers not to be confused by irregular, plural nouns. (e.g. fish, automata.)
 
+good:
+```php
+class FooController extends AppController{
+  ...
+}
+```
+
+bad:
+```php
+class FoosController extends AppController{
+  ...
+}
+```
+
+### Keep Controller simple
+Don't make a query at Controller.
+
+good:
+```php
+class FooController extends AppController{
+  public $components = array('Data');
+	
+  public function Index(){
+    $this->set('foos', $this->Data->GetFoos());
+  }
+}
+```
+
+bad:
+```php
+class FooController extends AppController{
+  public function Index(){
+    $foos = $this->Foo->find('all', array(
+      'conditions'=>array(
+        ...
+      ),
+      'order'=>array(
+        ...
+      ),
+      'limit'=>20,
+      ...
+    );
+    $this->set('foos', $foos);
+  }
+}
+```
+
+### Format, HTML Escape at View
+good:
+```php
+class FooController extends AppController{
+  ...
+  public function AveragePrice(){
+    $price = $this->Data->GetAveragePrice();
+    $this->set('price', round($price));
+  }
+}
+
+// at View
+Price: <?php echo round($price); ?>
+Text: <?php echo h($text); ?>
+```
+
+bad:
+```php
+class FooController extends AppController{
+  ...
+  public function AveragePrice(){
+    $price = $this->Data->GetAveragePrice();
+    $text = "Some user text";
+    $this->set('price', round($price));
+    $this->set('text', h($text));
+  }
+}
+
+// at View
+Price: <?php echo $price; ?>
+Text: <?php echo $text; ?>
+```
 
 ## Web Programming - Client
 
@@ -271,14 +431,55 @@ knockout.js is a balanced and ordered framework to bind data.
 
 
 ## Native Programming
-None
+
+### Use Xamarin for Native Apps
+Use Xamarin and C# to make native applications.
+
+good:
+```
+Write your codes in C# and deploy to Android, iOS and Windows Phone once.
+```
+
+bad:
+```
+Write your codes in Java for Android.
+Write your codes in Objective-C for iOS.
+Write your codes in C# for Windows Phone.
+
+... Now, you are tired from them. :(
+```
+
+### Use Unity3D for Games
+Use Unity3D to develop games.
+We can deploy the same game for Windows, Mac, Linux, Android, iOS, Windows Phone etc. by ease.
 
 
-## Source control
+## Source control and issue sharing
+
+### Use GitHub
+GitHub provides nice, integrated source control and issue sharing. Use GitHub as long as you can.
 
 ### Quality First
 Commit qualified changes only.
 Avoid commiting partially-implemented changes nor buggy changes.
+
+### Make Story and make it true
+When you plan and implement something, make Story (what should be done by user) first and note what are needed to make Story true. Story let your collaborators to understand what kind of functionality will be implemented immediately.
+
+good:
+```
+Story:
+User can sign up.
+
+Needed:
+- Registration Form with Email, UserName, Password inputs
+- Email Authentication
+```
+
+bad:
+```
+Add Registration Form with Email, UserName, Password inputs and Email Authentication.
+```
 
 ### Test case
 Add test cases when you are implementing a complex functionality like a WebAPI.
@@ -290,6 +491,13 @@ If you commit multiple functionalities once, you will have trouble when you want
 ### Commit up to several times/day
 Most engineers can implement 1-7 functionalities per day.
 Avoid unnecessary commits.
+
+### Send pull request which can be merged automatically
+Pull request which must be merged manually have highly chance of being rejected because it takes a lot of time of your collaborator. To avoid this, send pull request which can be merged automatically as long as you can.
+
+### Keep branches as short as you can
+In the most cases, keeping branches long requires massive efforts.
+When you make a branch, make, improve, pull request and delete(when merged successfully) quickly to save your time.
 
 
 ## Troubleshooting
