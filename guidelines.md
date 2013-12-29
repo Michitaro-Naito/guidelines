@@ -15,11 +15,23 @@ Please follow these instructions if you are willing to cooperate with us. ;)
 4. Programming Language
 
 ### Languages
-Most up-to-date documents are written ONLY in English.
-Please use English and forget about your mother tongue for a while.
+Most up-to-date documents are written in English.
+(In the most cases, translated documents are buggy, lack of information and obsoleted.)
+Please use English at any time and forget about your mother tongue for a while.
+
+good:
+```
+- Reference documents written in English.
+- Name symbols in English.
+```
+bad:
+```
+- Reference trancelated documents. (e.g. translated to Chinese, Hindi, Japanese - buggy!)
+- Name symbols not in English. (e.g. in Chinese-pinyin, Japanese-hiragana - your cooperators can't read it!)
+```
 
 ### Encoding
-UTF-8
+UTF-8 without BOM, LF(\n) unless specified.
 
 ### Legal
 Never violate any kind of Intellectual Property Rights (e.g. copyrights, patents, trademarks.).
@@ -154,7 +166,7 @@ class Bakery{
 ```
 
 ### Use useful names
-Avoid ambiguous names like "value1, 2, 3" and use obvious names to improve the readability of your code.
+Avoid ambiguous names like "value1, value2, value3..." and use obvious names to improve the readability of your code.
 
 good:
 ```csharp
@@ -183,7 +195,7 @@ public Customer[] GetCustomers(){
 bad:
 ```csharp
 public Customer[] GC(){
-  // Garbage Collection? Google Chrome?
+  // Garbage Collection? Google Chrome? Your cooperators will be confused.
   return _customers;
 }
 ```
@@ -244,7 +256,7 @@ public double CalculateSomething(int a, int b){
 ```
 
 ### Short Names for Iteration
-Use short names for iteration to type less.
+Use short names for iteration to type less and to keep readability.
 
 good:
 ```csharp
