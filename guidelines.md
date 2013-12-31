@@ -319,7 +319,7 @@ $foo->bae = 123;  // Typo. Declears new member variable "bae" happenedly and com
 
 ## Database
 
-### Singular
+### Singular Table Name
 Use singular names for tables not to be confused by irregular, plural nouns. (e.g. fish, automata.)
 
 good:
@@ -331,6 +331,28 @@ bad:
 ```sql
 create table customers(...);
 ```
+
+### Use Surrogate Key
+Don't use a business (natural) key as a primary key because we will have troubles when it is changed.
+Insert a surrogate key and make it primary instead.
+
+good:
+```sql
+create table customer(
+  id int comment('Unique surrogate key'),
+  customer_id char(8) unique comment('Business key like ABC00001.'),
+  name varchar(8) comment("Customer's name."),
+) id primary key;
+```
+
+bad:
+```sql
+create table customer(
+  customer_id char(8) unique comment('Business key like ABC00001.'),
+  name varchar(8) comment("Costomer's name."),
+) customer_id primary key;
+```
+
 
 
 ## Web Programming - Server
