@@ -235,6 +235,60 @@ public void UpgradeDataFormat(bool deleteIfFailed){
 }
 ```
 
+### Throw Exception if not working
+A function must stop running when it faces an error not to affect the system by unexpected ways.
+Don't warn and continue to run.
+
+good:
+```php
+public function ShipProductToCustomer($amount){
+  if(!is_int($amount))
+    throw Exception('$amount must be integer');
+  // Makes changes to database...
+}
+
+// This makes no change to database.
+ShipProductToCustomer(1.5);
+```
+bad:
+```php
+public function ShipProductToCustomer($amount){
+  if(!is_int($amount))
+    trigger_error('$amount must be integer', E_USER_WARNING);
+  // Makes changes to database...
+}
+
+// This may make unexpected changes to database.
+ShipProductToCustomer(1.5);
+```
+
+In addition, don't return true/false to identify succeeded/failed.
+Because such implementation will not provide stack-traces and it will be much harder to handle errors gracefully.
+
+good:
+```csharp
+public void DoSomething(){
+  if(error)
+    throw new Exception("Something went wrong!");
+  // ...
+}
+
+// Your cooperator receives an Exception and messages if failed.
+DoSomething();
+```
+bad:
+```csharp
+public bool DoSomething(){
+  if(error)
+    return false;
+  // ...
+}
+
+// Your cooperator doesn't receive any messages if failed.
+// Highly chance of letting him forget to handle errors.
+DoSomething();
+```
+
 ### Throw NotImplementedException if not implemented
 If you have partially-implemented codes, throw NotImplementedException to let your cooperators know that it's not ready to be called. If neglected, your cooperators may misunderstand that your function is done, try to call it, face misterious errors and waste their time.:(
 
@@ -316,6 +370,93 @@ $foo = new Foo();
 $foo->bae = 123;  // Typo. Declears new member variable "bae" happenedly and compile error never occur. This will be a hidden bug...
 ```
 
+### Use Bit-Flags or Named Arguments
+If you would like to pass many flags, we will encourage you to use bit-flags.
+
+good:
+```csharp
+// C#
+[Flags]
+public enum SomeFlags{
+  None = 0x0000,
+  
+  A = 0x0001,
+  B = 0x0002,
+  C = 0x0004,
+  D = 0x0008,
+  
+  CombinationOfAAndC = A | C
+}
+
+public void DoSomething(Flags flags){
+  // ...
+}
+
+DoSomething(SomeFlags.A | SomeFlags.C);
+// or
+DoSomething(SomeFlags.CombinationOfAAndC);
+```
+bad:
+```csharp
+public void DoSomething(bool a, bool b, bool c, bool d){
+  // ...
+}
+
+// It looks smart but will cause troubles when more flags are added.
+DoSomething(true, false, true, false);
+```
+bad:
+```csharp
+public enum SomeOptions{
+  None = 0,
+  
+  A = 1,
+  B = 2,
+  C = 3,
+  D = 4
+}
+
+public void DoSomething(List<SomeOptions> flags){
+  // ...
+}
+
+// Writes more and slower
+DoSomething(new List<SomeOptions>(){ SomeOptions.A, SomeOptions.C });
+```
+
+Lastly, Named Arguments might help you sometimes.
+This is very useful when passing vary objects.
+
+might be good:
+```csharp
+// C#
+public void DoSomething(bool a = false, bool b = false, bool c = false, bool d = false){
+  // ...
+}
+
+DoSomething(a: true, c: true);
+```
+
+### Solve all Warnings / Notice
+If your code warns you (on compile/run), we will encourage you to solve them.
+It will keep your codes clean and prevent warnings hiding others which are urgent.
+
+good:
+```csharp
+public void DoSomething(){
+  ProcessSomething();
+  return;
+}
+```
+bad:
+```csharp
+public void DoSomething(){
+  // Warns "str is decleard but never used"
+  var str = 'abc';
+  ProcessSomething();
+  return;
+}
+```
 
 ## Database
 
