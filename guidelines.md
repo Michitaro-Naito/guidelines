@@ -494,6 +494,52 @@ create table customer(
 ) customer_id primary key;
 ```
 
+### Bind Model on the Fly
+Binding models such as 'User has many Posts' is an expensive calculation.
+Most bindings are not always required. (e.g. Binding posts are required only when User attracts with them.)
+Bind them on the fly as long as you can.
+
+good:
+```csharp
+// C#, Entity Framework 5
+public class User{
+  // ...
+  // Posts will be fetched only when needed.
+  [InverseProperty("Owner")]
+  public virtual ICollection<Post> Posts { get; set; }
+}
+```
+
+```php
+// CakePHP
+// Bind model before querying.
+$this->User->bindModel(
+  'hasMany'=>array(
+    'Post'=>array(
+    )
+  )
+);
+$this->User->find(...);
+```
+
+bad:
+```csharp
+// C#, Entity Framework 5
+public class User{
+  // ...
+  // Without "virtual", Posts will be fetched always.
+  [InverseProperty("Owner")]
+  public ICollection<Post> Posts { get; set; }
+}
+```
+
+```php
+// CakePHP
+class User extends AppModel{
+  // Binded to Model directly. Posts will be fetched always.
+  public $hasMany = array('Post');
+}
+```
 
 
 ## Web Programming - Server
