@@ -300,11 +300,31 @@ public double CalculateSomething(int a, int b){
   throw new NotImplementedException();
 }
 ```
+
+```php
+// CakePHP
+public function CalculateSomething($a, $b){
+  $result = 0;
+  // ... Complex, partially implemented calculations here ...
+  throw new NotImplementedException('Function not implemented.');
+}
+```
 bad:
 ```csharp
 public double CalculateSomething(int a, int b){
   double result = 0;
   // ... Complex, partially implemented calculations here ...
+  // Returns wrong result
+  return result;
+}
+```
+
+```php
+// CakePHP
+public function CalculateSomething($a, $b){
+  $result = 0;
+  // ... Complex, partially implemented calculations here ...
+  // Returns wrong result
   return result;
 }
 ```
