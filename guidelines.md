@@ -200,6 +200,24 @@ public Customer[] GC(){
 }
 ```
 
+### Avoid "Group of Groups"
+
+Don't name symbols like "Group of Groups", "List of Lists".
+These names confuse your cooperators and have higher chance of introducing bugs.
+
+good:
+```
+Battalion has many Squadrons
+Squadron has many Squads
+Squad has many Humans
+```
+very bad:
+```
+GroupOfGroupsOfGroups has many GroupOfGroups
+GroupOfGroups has many Groups
+Group has many Humans
+```
+
 ### Comment anything
 Comment tables, fields, classes, properties, methods etc. to help your cooperators to understand your tables and codes.
 
@@ -457,7 +475,7 @@ public void DoSomething(bool a = false, bool b = false, bool c = false, bool d =
 DoSomething(a: true, c: true);
 ```
 
-### Solve all Warnings / Notice
+### Solve all Warnings / Notices
 If your code warns you (on compile/run), we will encourage you to solve them.
 It will keep your codes clean and prevent warnings hiding others which are urgent.
 
@@ -472,7 +490,7 @@ bad:
 ```csharp
 public void DoSomething(){
   // Warns "str is decleard but never used"
-  var str = 'abc';
+  var str = "abc";
   ProcessSomething();
   return;
 }
