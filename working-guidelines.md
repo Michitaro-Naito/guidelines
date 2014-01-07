@@ -55,6 +55,13 @@ But never pad your working-time nor costs.
 We think that's cheating, preventing cooperation and should be banned.
 
 
+### Never envy the others
+
+Alice earns x10 higher than Bob sometimes.
+Bob should never envy her success.
+Because unfair earnings between cooperators might be a fault of Amlitek, but not hers.
+
+
 ### Think Best and Offer
 
 Time is finite so that we can't specify everything sometimes.
