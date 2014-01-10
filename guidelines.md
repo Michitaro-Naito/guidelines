@@ -519,7 +519,7 @@ good:
 ```sql
 create table customer(
   id int primary key auto_increment,
-  name varchar(20) comment('Customer's real name.'),
+  name varchar(20) comment "Customer's real name.",
   ...
 );
 ```
@@ -527,9 +527,10 @@ bad:
 ```sql
 create table customer(
   ID int primary key auto_increment,
-  Name varchar(20) comment('Customer's real name.'),
+  Name varchar(20) comment "Customer's real name.",
   ...
 );
+// This bad table enforces your cooperators to mind 'id', 'Id' or 'ID' always.
 ```
 
 ### Use Surrogate Key
