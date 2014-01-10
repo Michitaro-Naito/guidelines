@@ -511,6 +511,27 @@ bad:
 create table customers(...);
 ```
 
+### Never use Upper Letters
+Handling upper and lower letters differs among systems. (e.g. 'Foo' = 'foo' is true for MySQL, false for PHP.)
+Never use upper letters for table-names nor field-names not to confuse your cooperators.
+
+good:
+```sql
+create table customer(
+  id int primary key auto_increment,
+  name varchar(20) comment('Customer's real name.'),
+  ...
+);
+```
+bad:
+```sql
+create table customer(
+  ID int primary key auto_increment,
+  Name varchar(20) comment('Customer's real name.'),
+  ...
+);
+```
+
 ### Use Surrogate Key
 Don't use a business (natural) key as a primary key because we will have troubles when it is changed.
 Insert a surrogate key and make it primary instead.
