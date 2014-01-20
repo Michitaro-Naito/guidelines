@@ -731,7 +731,7 @@ class FooController extends AppController{
   public function AveragePrice(){
     $price = $this->Data->GetAveragePrice();
     $text = "Some user text";
-    $this->set('price', round($price));
+    $this->set('price', $price);
     $this->set('text', $text);
   }
 }
