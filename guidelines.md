@@ -496,6 +496,33 @@ public void DoSomething(){
 }
 ```
 
+### Respect Object-Oriented Programming
+Respect object-oriented programming always to make your codes extendable.
+For example, if Company has many Employees, Employee must be an object.
+(Do not implement Employee as a non-object.)
+
+good:
+```csharp
+public class Employee{
+  int id;
+  string name;
+  // ...
+}
+public class Company{
+  List<Employee> employees = new List<Employee>();
+  // ...
+}
+```
+
+very bad:
+```csharp
+public class Company{
+  List<int> employeeIds = new List<int>();
+  List<string> employeeNames = new List<string>();
+  // ...
+}
+```
+
 ## Database
 
 ### Singular Table Name
