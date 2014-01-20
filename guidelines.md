@@ -523,6 +523,44 @@ public class Company{
 }
 ```
 
+### Use Field Names as Keys
+Use field names as keys as long as you can to write less.
+
+good:
+```javascript
+function Employee(id, name){
+  var s = this;
+  s.id = id;
+  s.name = name;
+  s.keys = ['id', 'name'];
+  
+  s.GetValue = function(key){
+    if(!s.keys.contains(key))
+      throw new Exception('Invalid key: ' + key);
+    return s[key];
+  }
+}
+```
+bad:
+```javascript
+function Employee(id, name){
+  var s = this;
+  s.id = id;
+  s.name = name;
+  
+  // This function grows much bigger if Employee gets more member variables. 
+  s.GetValue = function(key){
+    switch(key){
+      case 'EmployeeId':
+        return s.id;
+      case 'Name':
+        return s.name;
+    }
+    throw new Exception('Invalid key: ' + key);
+  }
+}
+```
+
 ## Database
 
 ### Singular Table Name
