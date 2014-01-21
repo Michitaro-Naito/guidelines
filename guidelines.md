@@ -865,6 +865,8 @@ First of all, tell us if you have any troubles.
 
 
 ## See Also
+[C# Coding Conventions](http://msdn.microsoft.com/en-us/library/ff926074.aspx)
+
 [Mono Coding Guidelines](http://www.mono-project.com/Coding_Guidelines)
 
 [CakePHP Coding Standards](http://book.cakephp.org/2.0/en/contributing/cakephp-coding-conventions.html)
