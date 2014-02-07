@@ -669,6 +669,11 @@ class User extends AppModel{
 
 ## Web Programming - Server
 
+### No Session
+Never store data to sessions because they will be a first bottle-neck.
+Authentication data should go signed (or encrypted) cookies.
+Persistent data should go database.
+
 ### Singular
 Use singular names for Controllers not to be confused by irregular, plural nouns. (e.g. fish, automata.)
 
