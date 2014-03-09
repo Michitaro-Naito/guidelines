@@ -20,6 +20,8 @@ If you are willing to publish your library, make it Nuget and publish codes on G
 
 Always test success and failure.
 
+Server must show errors gracefully. An error code, short description and possible reasons should be shown as long as possible. (eg. Error #123 Failed inserting to database. Possible reasons: compete, network failure.)
+
 Talking about reponsibility among cooperaters wastes time. Just solve problems or discuss how to solve them instead.
 
 Non-scalable business has no future. Just decline and never take your time for it.
