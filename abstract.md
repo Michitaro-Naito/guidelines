@@ -10,6 +10,8 @@ International website must have a URL scheme like "/en-US/User/Login". (Never us
 
 If Server and Client use the same data-scheme, then make it DLL and share it. (Never change it oftenly, of course.)
 
+When failed, WebAPI must not return just HttpStatusCode like "400 Bad Request" because it makes much harder to be handled gracefully. Add ErrorCode and ReadableMessage as body.
+
 Redis is a nice server to cache but maybe you made a mistake to keep things scalable if you need it. (Properly designed, scalable web applications never need Redis.)
 
 To protect innocent Users from evil Users, User must be authenticated by at least one of these methods: Google+, CarrierEmail or CreditCard. IPAddress and DeviceID are not sufficient.
